@@ -47,3 +47,13 @@ def generate_key() -> str:
     :return: A dictionary with the generated key\n
     """
     return crypto.generateKey()
+
+
+@router.get("/hash")
+def hash_string(text: str) -> str:
+    """
+    Hashes a string (in SHA256).\n
+    :param text: The string to hash\n
+    :return: A dictionary with the hashed string\n
+    """
+    return crypto.hashString(text)

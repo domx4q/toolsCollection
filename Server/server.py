@@ -5,9 +5,11 @@ import sys
 
 sys.path.append("..")
 from Server.subroutes import crypto
+from Server.subroutes import database
 
 app = FastAPI()
 app.include_router(crypto.router, prefix="/crypto", tags=["crypto"])
+app.include_router(database.router, prefix="/db", tags=["database"])
 
 origins_regex = re.compile(r"https?://(?:localhost|127\.0\.0\.1)(?::[0-9]+)?(?![^:])")
 app.add_middleware(
