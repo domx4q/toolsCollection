@@ -28,3 +28,18 @@ def ping() -> str:
     :return: A simple pong\n
     """
     return "pong"
+
+
+@app.get("/")
+def root() -> dict:
+    """
+    Returns all the routes.\n
+    :return: All the routes\n
+    """
+    out = {}
+    paths = []
+    paths = [i.path for i in app.routes]
+    paths = sorted(paths)
+    for i in paths:
+        out[i] = [j.name for j in app.routes if j.path == i][0]
+    return out

@@ -21,5 +21,16 @@ def generateKey() -> str:
     return Fernet.generate_key().decode()
 
 
-def hashString(to_hash: str) -> str:
-    return hashlib.sha256(to_hash.encode()).hexdigest()
+def hashString(to_hash: str, mode="sha256") -> str:
+    mode = mode.lower()
+    methods = {
+        "sha256": hashlib.sha256,
+        "sha512": hashlib.sha512,
+        "sha224": hashlib.sha224,
+        "sha384": hashlib.sha384,
+        "sha1": hashlib.sha1,
+        "md5": hashlib.md5
+    }
+    if mode not in methods:
+        raise ValueError(f"Invalid mode {mode}")
+    return methods[mode](to_hash.encode()).hexdigest()

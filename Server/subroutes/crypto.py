@@ -50,10 +50,11 @@ def generate_key() -> str:
 
 
 @router.get("/hash")
-def hash_string(text: str) -> str:
+def hash_string(text: str, mode: Optional[str] = "sha256") -> str:
     """
-    Hashes a string (in SHA256).\n
+    Hashes a string.\n
     :param text: The string to hash\n
+    :param mode: [Optional] The mode to hash with. Default is sha256\n
     :return: A dictionary with the hashed string\n
     """
-    return crypto.hashString(text)
+    return crypto.hashString(text, mode)

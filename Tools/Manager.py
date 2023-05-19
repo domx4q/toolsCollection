@@ -26,5 +26,5 @@ class Manager:
     def decrypt(self, to_decrypt: str) -> str:
         return crypto.decryptBasicString(to_decrypt, self.__key)
 
-    def hash(self, to_hash: str) -> str:
-        return crypto.hashString(to_hash)
+    def hash(self, to_hash: str, mode="sha256") -> str:
+        return crypto.hashString(to_hash, mode)
