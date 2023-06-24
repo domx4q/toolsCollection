@@ -25,6 +25,7 @@ extensions = [
     'sphinx.ext.intersphinx',
 
     'autoapi.extension',
+    'sphinxcontrib.openapi',
 ]
 
 autoapi_type = 'python'

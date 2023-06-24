@@ -1,0 +1,423 @@
+openapi: 3.0.2
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  /crypto/encrypt:
+    get:
+      tags:
+        - crypto
+      summary: Encrypt
+      description: >-
+        Encrypts a string with a key.
+
+
+        :param text: The string to encrypt
+
+
+        :param key: [Optional] The key to encrypt with. If not provided, a new
+        key will be generated.
+
+
+        :return: A dictionary with the encrypted string and the key
+      operationId: encrypt_crypto_encrypt_get
+      parameters:
+        - required: true
+          schema:
+            title: Text
+            type: string
+          name: text
+          in: query
+        - required: false
+          schema:
+            title: Key
+            type: string
+          name: key
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Encrypt Crypto Encrypt Get
+                type: object
+                additionalProperties:
+                  type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /crypto/decrypt:
+    get:
+      tags:
+        - crypto
+      summary: Decrypt
+      description: |-
+        Decrypts a string with a key.
+
+        :param text: The string to decrypt
+
+        :param key: The key to decrypt with
+
+        :return: A dictionary with the decrypted string
+      operationId: decrypt_crypto_decrypt_get
+      parameters:
+        - required: true
+          schema:
+            title: Text
+            type: string
+          name: text
+          in: query
+        - required: true
+          schema:
+            title: Key
+            type: string
+          name: key
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Decrypt Crypto Decrypt Get
+                anyOf:
+                  - type: object
+                  - type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /crypto/generateKey:
+    get:
+      tags:
+        - crypto
+      summary: Generate Key
+      description: |-
+        Generates a key.
+
+        :return: A dictionary with the generated key
+      operationId: generate_key_crypto_generateKey_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Generate Key Crypto Generatekey Get
+                type: string
+  /crypto/hash:
+    get:
+      tags:
+        - crypto
+      summary: Hash String
+      description: |-
+        Hashes a string.
+
+        :param text: The string to hash
+
+        :param mode: [Optional] The mode to hash with. Default is sha256
+
+        :return: A dictionary with the hashed string
+      operationId: hash_string_crypto_hash_get
+      parameters:
+        - required: true
+          schema:
+            title: Text
+            type: string
+          name: text
+          in: query
+        - required: false
+          schema:
+            title: Mode
+            type: string
+            default: sha256
+          name: mode
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Hash String Crypto Hash Get
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /db/connect:
+    get:
+      tags:
+        - database
+      summary: Connect
+      operationId: connect_db_connect_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Connect Db Connect Get
+                type: boolean
+  /db/create:
+    get:
+      tags:
+        - database
+      summary: Create Table
+      operationId: create_table_db_create_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Create Table Db Create Get
+                type: boolean
+  /db/list:
+    get:
+      tags:
+        - database
+      summary: Listtables
+      operationId: listTables_db_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Listtables Db List Get
+                type: string
+  /db/add:
+    put:
+      tags:
+        - database
+      summary: Add User
+      operationId: add_user_db_add_put
+      parameters:
+        - required: true
+          schema:
+            title: Username
+            type: string
+          name: username
+          in: query
+        - required: true
+          schema:
+            title: Password
+            type: string
+          name: password
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Add User Db Add Put
+                type: boolean
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /db/update:
+    patch:
+      tags:
+        - database
+      summary: Update User
+      operationId: update_user_db_update_patch
+      parameters:
+        - required: true
+          schema:
+            title: Username
+            type: string
+          name: username
+          in: query
+        - required: true
+          schema:
+            title: Password
+            type: string
+          name: password
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Update User Db Update Patch
+                type: boolean
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /db/delete:
+    delete:
+      tags:
+        - database
+      summary: Delete User
+      operationId: delete_user_db_delete_delete
+      parameters:
+        - required: true
+          schema:
+            title: Username
+            type: string
+          name: username
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Delete User Db Delete Delete
+                type: boolean
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /db/get:
+    get:
+      tags:
+        - database
+      summary: Get User
+      operationId: get_user_db_get_get
+      parameters:
+        - required: true
+          schema:
+            title: Username
+            type: string
+          name: username
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get User Db Get Get
+                type: object
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /db/getall:
+    get:
+      tags:
+        - database
+      summary: Get All Users
+      operationId: get_all_users_db_getall_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get All Users Db Getall Get
+                type: object
+  /db/deleteall:
+    delete:
+      tags:
+        - database
+      summary: Delete All Users
+      operationId: delete_all_users_db_deleteall_delete
+      parameters:
+        - required: false
+          schema:
+            title: You Sure
+            type: boolean
+            default: false
+          name: you_sure
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Delete All Users Db Deleteall Delete
+                type: boolean
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ping:
+    get:
+      summary: Ping
+      description: |-
+        Returns a simple pong.
+
+        :return: A simple pong
+      operationId: ping_ping_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Ping Ping Get
+                type: string
+  /:
+    get:
+      summary: Root
+      description: |-
+        Returns all the routes.
+
+        :return: All the routes
+      operationId: root__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Root  Get
+                type: object
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
