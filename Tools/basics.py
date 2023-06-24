@@ -1,3 +1,7 @@
+"""
+This file contains basic functions and classes that are used throughout each module file.
+"""
+
 from ._globalImports import *
 
 

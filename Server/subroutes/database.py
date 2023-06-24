@@ -14,6 +14,7 @@ def getConnection():
 def getResponseDict(query: str) -> dict:
     """
     This method return the info from a database in a better way, so that the column name is the key and the value is the value.
+
     :param query: The normal SQL query
     :return: A dictionary with the column name as the key and the value as the value
     """
