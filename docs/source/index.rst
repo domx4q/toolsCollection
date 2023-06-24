@@ -17,5 +17,3 @@ Contents
    frontend
    tools
    gui
-
-   test
