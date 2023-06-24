@@ -14,7 +14,7 @@
         @click="submit"
         :label="name"
     />
-    <div id="result">{{result}}</div>
+    <div id="result" :class="{error:isError}">{{result}}</div>
   </div>
 </template>
 <script>
@@ -30,13 +30,21 @@ export default {
   data() {
     return {
       text: null,
-      result: null
+      result: null,
+
+      isError: false
     }
   },
   methods: {
     submit() {
       this.axios.get(this.fullUrl).then(response => {
         console.log(response)
+        this.isError = false
+        if (response.data["error"]) {
+          this.isError = true
+          this.result = response.data["error"]
+          return
+        }
         if (this.mode === 'encrypt') {
           this.result = response.data["encrypted"]
         } else {
@@ -45,6 +53,16 @@ export default {
         this.$emit('action', this.result)
       }).catch(error => {
         console.log(error)
+        this.isError = true
+        if (error.response) {
+          if (error.response.data["detail"]) {
+            this.result = error.response.data["detail"]
+            return
+          }
+          this.result = error.response.data
+          return
+        }
+        this.result = error
       })
     }
   },
@@ -68,5 +86,8 @@ export default {
   border: 1px solid black;
   border-radius: 5px;
   background-color: hsla(0, 0%, 0%, 0.3);
+}
+.error {
+  color: red;
 }
 </style>

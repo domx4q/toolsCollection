@@ -1,3 +1,4 @@
+import cryptography.fernet
 from fastapi import APIRouter, HTTPException
 from fastapi.utils import *
 import sys
@@ -26,7 +27,7 @@ def encrypt(text: str, key: Optional[str] = None) -> Dict[str, str]:
 
 
 @router.get("/decrypt")
-def decrypt(text: str, key: str) -> Dict[str, str] | str:
+def decrypt(text: str, key: str) -> Union[dict, str]:
     """
     Decrypts a string with a key.\n
     :param text: The string to decrypt\n
@@ -35,7 +36,7 @@ def decrypt(text: str, key: str) -> Dict[str, str] | str:
     """
     try:
         decrypted = crypto.decryptBasicString(text, key)
-    except ValueError:
+    except (ValueError, cryptography.fernet.InvalidToken):
         return {"error": "The key is invalid"}
     return decrypted
 

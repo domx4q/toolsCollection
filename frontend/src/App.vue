@@ -5,7 +5,7 @@
       <div class="item">
         <Action name="Schlüssel erstellen" path="/crypto/generateKey" type="simple" @action="key=$event"/>
       </div>
-      <button type="button" @click="updateKey">Schlüssel aus Zwischenablage auslesen <span class="small">only Chrome</span></button>
+      <button type="button" @click="updateKey">read keyboard<br> <span class="small">only Chrome</span></button>
       <div class="item"><CryptoAction name="Verschlüsseln" path="/crypto/encrypt" mode="encrypt" :kee="key"/></div>
       <div class="item"><CryptoAction name="Entschlüsseln" path="/crypto/decrypt" mode="decrypt" :kee="key"/></div>
     </Section>
