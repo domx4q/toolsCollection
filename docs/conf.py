@@ -29,7 +29,7 @@ extensions = [
 ]
 
 autoapi_type = 'python'
-autoapi_dirs = ['../../Tools', '../../Server', '../../GUI']
+autoapi_dirs = ['../Tools', '../Server', '../GUI']
 
 
 intersphinx_mapping = {
