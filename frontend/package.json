@@ -12,7 +12,7 @@
     "@formkit/i18n": "^0.18.0",
     "@formkit/themes": "^0.18.0-065ebab",
     "@formkit/vue": "^0.18.0-065ebab",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "vue": "^3.2.47",
     "vue-axios": "^3.5.2"
   },
