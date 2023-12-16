@@ -13,7 +13,7 @@
     "@formkit/themes": "^0.19.3",
     "@formkit/vue": "^0.18.0-065ebab",
     "axios": "^1.6.0",
-    "vue": "^3.3.7",
+    "vue": "^3.3.9",
     "vue-axios": "^3.5.2"
   },
   "devDependencies": {
